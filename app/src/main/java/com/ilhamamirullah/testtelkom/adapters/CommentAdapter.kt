@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentAdapter (private val context: Context, private val itemList: List<CommentResponse?>?) :
     RecyclerView.Adapter<CommentAdapter.CommentVH>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentVH =
         CommentVH(LayoutInflater.from(context).inflate(R.layout.item_comment, parent, false))
 
@@ -33,7 +34,6 @@ class CommentAdapter (private val context: Context, private val itemList: List<C
             }else{
                 itemView.comment_textView.setText("-")
             }
-
         }
     }
 }

@@ -11,10 +11,12 @@ import com.ilhamamirullah.testtelkom.R
 import com.ilhamamirullah.testtelkom.activities.StoryDetailActivity
 import java.util.ArrayList
 
-class TopStoryAdapter(private val list: ArrayList<ArticleModel>) : RecyclerView.Adapter<TopStoryAdapter.MyviewHolder>() {
+class TopStoryAdapter(private val list: ArrayList<ArticleModel>) :
+    RecyclerView.Adapter<TopStoryAdapter.MyviewHolder>() {
     private var context: Context? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyviewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_top_stories, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_top_stories, parent, false)
         context = parent.context
         return MyviewHolder(view)
     }
@@ -26,7 +28,7 @@ class TopStoryAdapter(private val list: ArrayList<ArticleModel>) : RecyclerView.
 
         holder.itemView.setOnClickListener {
             val id: Int = list[position].id
-            Log.i("isi id di adapter",id.toString())
+            Log.i("isi id di adapter", id.toString())
             val intent = Intent(context, StoryDetailActivity::class.java)
             intent.putExtra("id", id)
             context!!.startActivity(intent)

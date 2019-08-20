@@ -31,10 +31,12 @@ class StoryDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_story_detail)
-        loading = MaterialDialog.Builder(this).cancelable(false).content("Loading").progress(true, 0)
+        loading = MaterialDialog.Builder(this)
+            .cancelable(false)
+            .content("Loading")
+            .progress(true, 0)
             .build()
         val id: Int = intent.getIntExtra("id", 0)
-
         detail_imageView.setOnClickListener {
             if (clickImage){
                 detail_imageView.setImageResource(R.drawable.ic_star_border_black_24dp)
@@ -48,9 +50,7 @@ class StoryDetailActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
         getData(id)
-
     }
 
     fun getData(id:Int){
@@ -68,11 +68,9 @@ class StoryDetailActivity : AppCompatActivity() {
                 val date = java.util.Date(time * 1000)
                 val kidsList:List<Int?>? = response.body()!!.kids
                 val kidsCount = if (kidsList!=null) if (kidsList.size>20) 20 else kidsList.size-1 else 0
-
                 detail_coment_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
                 detail_coment_recyclerview.setHasFixedSize(true)
                 detail_coment_recyclerview.isNestedScrollingEnabled = false
-
                 detail_title.setText(title)
                 detail_by.setText(by)
                 detail_date.setText(sdf.format(date))
@@ -85,17 +83,14 @@ class StoryDetailActivity : AppCompatActivity() {
                                 detail_coment_recyclerview.setAdapter(adapter)
                                 adapter.notifyDataSetChanged()
                             }
-
                             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
                                 Toast.makeText(applicationContext, "Something wrong", Toast.LENGTH_SHORT).show()
                             }
                         })
                     }
                 }
-
             runOnUiThread { loading.dismiss() }
             }
-
             override fun onFailure(call: Call<TopStoriesModel>, t: Throwable) {
                 runOnUiThread { loading.dismiss() }
                 Toast.makeText(applicationContext, "Something wrong", Toast.LENGTH_SHORT).show()

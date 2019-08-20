@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit
 
 class ApiClient {
     private var retrofit: Retrofit? = null
-
     fun getClient(): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
