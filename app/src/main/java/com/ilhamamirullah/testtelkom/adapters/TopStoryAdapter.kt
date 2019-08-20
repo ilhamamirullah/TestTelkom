@@ -3,6 +3,7 @@ package com.ilhamamirullah.testtelkom.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import com.ilhamamirullah.testtelkom.models.ArticleModel
@@ -25,6 +26,7 @@ class TopStoryAdapter(private val list: ArrayList<ArticleModel>) : RecyclerView.
 
         holder.itemView.setOnClickListener {
             val id: Int = list[position].id
+            Log.i("isi id di adapter",id.toString())
             val intent = Intent(context, StoryDetailActivity::class.java)
             intent.putExtra("id", id)
             context!!.startActivity(intent)
