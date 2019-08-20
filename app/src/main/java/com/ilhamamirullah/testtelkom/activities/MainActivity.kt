@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
                             val title = response.body()!!.title.toString()
                             val score = response.body()!!.score.toString()
                             val jmlComment = response.body()!!.kids?.size.toString()
-                            val articleModel = ArticleModel(title, jmlComment,score)
+                            val id = response.body()!!.id!!
+                            val articleModel = ArticleModel(id, title, jmlComment,score)
                             list.add(articleModel)
                             val adapter = TopStoryAdapter(list)
                             recyclerview.setAdapter(adapter)

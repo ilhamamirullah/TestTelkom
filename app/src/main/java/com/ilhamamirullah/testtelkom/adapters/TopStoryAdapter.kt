@@ -1,11 +1,13 @@
 package com.ilhamamirullah.testtelkom.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.widget.TextView
 import com.ilhamamirullah.testtelkom.models.ArticleModel
 import com.ilhamamirullah.testtelkom.R
+import com.ilhamamirullah.testtelkom.activities.StoryDetailActivity
 import java.util.ArrayList
 
 class TopStoryAdapter(private val list: ArrayList<ArticleModel>) : RecyclerView.Adapter<TopStoryAdapter.MyviewHolder>() {
@@ -21,8 +23,11 @@ class TopStoryAdapter(private val list: ArrayList<ArticleModel>) : RecyclerView.
         holder.jumlahComment.setText(list[position].jmlComment.toString())
         holder.score.setText(list[position].score.toString())
 
-        holder.title.setOnClickListener {
-
+        holder.itemView.setOnClickListener {
+            val id: Int = list[position].id
+            val intent = Intent(context, StoryDetailActivity::class.java)
+            intent.putExtra("id", id)
+            context!!.startActivity(intent)
         }
     }
 
