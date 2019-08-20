@@ -30,6 +30,7 @@ class StoryDetailActivity : AppCompatActivity() {
         val id: Int = intent.getIntExtra("id", 0)
         val apiInterface = ApiClient()
         val apiInt = apiInterface.getClient().create(ApiInterface::class.java)
+        var clickImage: Boolean = false
 
         apiInt.getArticle(id).enqueue(object : Callback<TopStoriesModel> {
             @SuppressLint("SimpleDateFormat")
@@ -44,6 +45,17 @@ class StoryDetailActivity : AppCompatActivity() {
                 val date = java.util.Date(time * 1000)
                 val kidsList:List<Int?>? = response.body()!!.kids
                 val kidsCount = if (kidsList!=null) if (kidsList!!.size>20) 20 else kidsList.size-1 else 0
+
+                detail_imageView.setOnClickListener {
+                    if (clickImage){
+                        detail_imageView.setImageResource(R.drawable.ic_star_border_black_24dp)
+                        clickImage = false
+                    }else{
+                        detail_imageView.setImageResource(R.drawable.ic_star_black_24dp)
+                        clickImage = true
+                    }
+
+                }
 
                 detail_coment_recyclerview.layoutManager = LinearLayoutManager(applicationContext)
                 detail_coment_recyclerview.setHasFixedSize(true)
